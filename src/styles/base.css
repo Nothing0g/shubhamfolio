@@ -17,3 +17,21 @@
 .art-caption{margin:14px 4px 0;color:var(--color-foreground-muted);font:1rem var(--font-hand)}
 @supports not (backdrop-filter:blur(12px)){.navbar{background:var(--color-background)}}
 @media(prefers-reduced-motion:reduce){.navbar,.art-image,.case-interior-art{transition:none!important}.navbar--hidden{transform:none;opacity:1;pointer-events:auto}.art:hover .art-image,.case-interior-art:hover{transform:none}}
+
+/* Richer sticker-board art and tactile case-card interactions. */
+.art-image{mix-blend-mode:normal;filter:saturate(1.06) contrast(1.04)}
+.art-label{background:rgba(251,247,240,.82);padding:4px 8px;border-radius:999px;backdrop-filter:blur(4px)}
+.navbar--open{box-shadow:0 16px 40px rgba(28,26,39,.18)}
+.case-card{position:relative;isolation:isolate;overflow:hidden;transition:transform .5s var(--motion-ease),box-shadow .5s var(--motion-ease),border-color .35s ease}
+.case-card:before{content:'';position:absolute;inset:12px;border:1px solid transparent;border-radius:calc(var(--radius-lg) - 10px);pointer-events:none;transition:border-color .35s ease,transform .5s var(--motion-ease)}
+.case-card:after{content:'↗';position:absolute;right:28px;top:28px;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--color-background);color:var(--color-primary);font-size:1.2rem;opacity:0;transform:translate(8px,-8px) rotate(-20deg);transition:opacity .35s ease,transform .45s var(--motion-ease)}
+.case-card:hover{transform:translateY(-14px) rotate(-.8deg);box-shadow:0 28px 60px rgba(28,26,39,.2);border-color:var(--color-primary)}
+.case-card:hover:before{border-color:currentColor;transform:scale(.98)}
+.case-card:hover:after{opacity:1;transform:translate(0,0) rotate(0)}
+.case-card:hover .case-art .art-image{transform:scale(1.08) rotate(1deg)}
+.case-card h3,.case-card p,.case-card .text-link{transition:transform .4s var(--motion-ease),color .3s ease}
+.case-card:hover h3{transform:translateX(5px)}
+.case-card:hover .text-link{color:var(--color-accent);transform:translateX(5px)}
+.case-card__meta .badge{transition:background .3s ease,color .3s ease,transform .3s var(--motion-ease)}
+.case-card:hover .badge{background:var(--color-primary);color:var(--color-foreground-inverse);transform:rotate(-3deg)}
+@media(prefers-reduced-motion:reduce){.case-card:before,.case-card:after,.case-card h3,.case-card p,.case-card .text-link,.case-card__meta .badge{transition:none}.case-card:hover{transform:none}.case-card:hover .case-art .art-image,.case-card:hover h3,.case-card:hover .text-link{transform:none}}
